@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import * as firebase from 'firebase/app';
+import { LoginRequestService } from '../services/request/login-request.service';
 
 @Component({
   selector: 'app-login',
@@ -11,14 +12,19 @@ import * as firebase from 'firebase/app';
 })
 export class LoginPage {
 
-  username: string ;
-  password: string ;
+  username: string;
+  password: string;
+  codeSrc: string;
 
 
   passwordType = 'password';
   passwordIcon = 'eye-off';
 
-  constructor(public afs: AngularFireAuth, public rout: Router ,  public alertController: AlertController) { }
+  constructor(public afs: AngularFireAuth, public rout: Router, public alertController: AlertController,
+    private loginRequet: LoginRequestService) {
+    this.getCode(); // 获取验证码图片
+
+  }
 
   async login() {
 
@@ -34,20 +40,20 @@ export class LoginPage {
       console.log(error);
       if (error.code === 'auth/wrong-password') {
         this.error('Incorrect Password');
-      }  if (error.code === 'auth/user-not-found') {
+      } if (error.code === 'auth/user-not-found') {
         this.error('User dont found');
       }
       if (error.code === 'auth/email-already-in-use') {
         this.error('User already use');
       }
-      if ( error.code === 'auth/argument-error') {
+      if (error.code === 'auth/argument-error') {
         this.error('Argument error');
-       }
-       if ( error.code === 'auth/invalid-email') {
+      }
+      if (error.code === 'auth/invalid-email') {
         this.error('Invalid email');
-       } else {
+      } else {
         this.error('Something went wrong try later');
-       }
+      }
     }
   }
   async loginGmail() {
@@ -58,18 +64,18 @@ export class LoginPage {
     } catch (error) {
       if (error.code === 'auth/wrong-password') {
         this.error('Incorrect Password');
-      }  if (error.code === 'auth/user-not-found') {
+      } if (error.code === 'auth/user-not-found') {
         this.error('User dont found');
       }
       if (error.code === 'auth/email-already-in-use') {
         this.error('User already use');
       }
-      if ( error.code === 'auth/argument-error') {
+      if (error.code === 'auth/argument-error') {
         this.error('Argument error');
-       }
-       if ( error.code === 'auth/invalid-email') {
+      }
+      if (error.code === 'auth/invalid-email') {
         this.error('Invalid error');
-       }
+      }
       console.log(error);
     }
   }
@@ -89,12 +95,18 @@ export class LoginPage {
   hideShowPassword() {
     this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
     this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
-}
-moveFocus(nextElement) {
-  nextElement.setFocus();
-}
+  }
+  moveFocus(nextElement) {
+    nextElement.setFocus();
+  }
   gotoslides() {
     this.rout.navigateByUrl('/');
+  }
+  getCode() {
+
+    this.loginRequet.getVerificationCode().then((res: any) => {
+      this.codeSrc = res.image;
+    });
   }
 
 }

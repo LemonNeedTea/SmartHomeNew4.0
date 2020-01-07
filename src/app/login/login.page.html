@@ -17,7 +17,7 @@
             </ion-item>
             <ion-item>
                 <ion-input (keyup.enter)="login()" type="text" #c placeholder="Code" [(ngModel)]="code" required></ion-input>
-                <img src="assets/icon/code.png" alt="点击刷新" srcset="" height="30">
+                <img [src]="codeSrc" alt="点击刷新" srcset="" height="30" (click)="getCode()">
             </ion-item>
 
         </ion-list>
