@@ -15,6 +15,7 @@ export class LoginPage {
   username: string;
   password: string;
   codeSrc: string;
+  code: string;
 
 
   passwordType = 'password';
@@ -28,33 +29,7 @@ export class LoginPage {
 
   async login() {
 
-    const { username, password } = this;
-    console.log(username, password);
-    try {
-      const res = await this.afs.auth.signInWithEmailAndPassword(username, password);
-      console.log(res);
-      setTimeout(() => {
-        this.rout.navigateByUrl('');
-      }, 1000);
-    } catch (error) {
-      console.log(error);
-      if (error.code === 'auth/wrong-password') {
-        this.error('Incorrect Password');
-      } if (error.code === 'auth/user-not-found') {
-        this.error('User dont found');
-      }
-      if (error.code === 'auth/email-already-in-use') {
-        this.error('User already use');
-      }
-      if (error.code === 'auth/argument-error') {
-        this.error('Argument error');
-      }
-      if (error.code === 'auth/invalid-email') {
-        this.error('Invalid email');
-      } else {
-        this.error('Something went wrong try later');
-      }
-    }
+    this.loginRequet.login(this.username, this.password, this.code);
   }
   async loginGmail() {
     try {

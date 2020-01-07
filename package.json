@@ -41,6 +41,7 @@
     "core-js": "^2.5.4",
     "firebase": "^7.5.0",
     "ionic-plugin-keyboard": "^2.2.1",
+    "qs": "^6.9.1",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
   },
