@@ -29,6 +29,8 @@ export class LoginRequestService {
     }).then((res: any) => {
       // 成功保存token
       this.tools.setToken(res.token);
+    }).catch(err => {
+      alert(err) ;
     });
   }
 }

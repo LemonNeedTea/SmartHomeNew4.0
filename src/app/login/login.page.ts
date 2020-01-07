@@ -27,8 +27,7 @@ export class LoginPage {
 
   }
 
-  async login() {
-
+  login() {
     this.loginRequet.login(this.username, this.password, this.code);
   }
   async loginGmail() {
