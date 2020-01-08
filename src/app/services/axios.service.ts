@@ -3,6 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { BaseUI } from '../../common/baseui';
 import { ToolsService } from './tools.service';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -14,7 +15,8 @@ export class AxiosService extends BaseUI {
   loader: any;
   constructor(private tools: ToolsService,
     private loading: LoadingController,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    private router: Router) {
     super();
     axios.defaults.baseURL = 'http://localhost:8888';
     // 添加响应拦截器
@@ -48,10 +50,12 @@ export class AxiosService extends BaseUI {
           return tempData.data;
         } else {
           // 失败
+          super.showToast(this.toastCtrl, tempData['msg']);
           if (tempData.code === 5104) {// token失效
             // 1.清除token
             this.tools.cleanToken();
             // 2.弹出确认返回登录框
+            this.router.navigateByUrl('/login');
 
           }
           console.error(tempData);

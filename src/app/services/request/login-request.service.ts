@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AxiosService } from '../axios.service';
 import {ToolsService} from '../tools.service';
+import{ServicesService} from '../services.service'
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ import {ToolsService} from '../tools.service';
 export class LoginRequestService {
 
   constructor(private axiosHttp: AxiosService,
-    private tools: ToolsService) { }
+    private tools: ToolsService,
+    private services: ServicesService) { }
   /**
    * 获取登录验证码图片数据
    */
@@ -30,8 +32,9 @@ export class LoginRequestService {
     }).then((res: any) => {
       // 成功保存token
       this.tools.setToken(res.token);
+      this.services.goto('main');
     }).catch(err => {
-      alert(err) ;
+      console.log(err) ;
     });
   }
 }

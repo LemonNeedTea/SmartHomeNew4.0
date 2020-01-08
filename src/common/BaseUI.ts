@@ -1,4 +1,4 @@
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ToastController,AlertController } from '@ionic/angular';
 
 export abstract class BaseUI {
     constructor() {
