@@ -17,4 +17,14 @@ export class ToolsService {
       return null;
     }
   }
+  setVerifyToken(token: string) {
+    this.storage.set('verify-token', token);
+  }
+  getVerifyToken() {
+    try {
+      return this.storage.get('verify-token');
+    } catch (err) {
+      return null;
+    }
+  }
 }

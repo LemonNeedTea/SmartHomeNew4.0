@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import * as firebase from 'firebase/app';
 import { LoginRequestService } from '../services/request/login-request.service';
+import { ToolsService } from '../services/tools.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginPage {
   passwordIcon = 'eye-off';
 
   constructor(public afs: AngularFireAuth, public rout: Router, public alertController: AlertController,
-    private loginRequet: LoginRequestService) {
+    private loginRequet: LoginRequestService,
+    private tools: ToolsService) {
     this.getCode(); // 获取验证码图片
 
   }
@@ -80,6 +82,7 @@ export class LoginPage {
 
     this.loginRequet.getVerificationCode().then((res: any) => {
       this.codeSrc = res.image;
+      this.tools.setVerifyToken(res['verifyToken']);
     });
   }
 

@@ -25,7 +25,8 @@ export class LoginRequestService {
     return this.axiosHttp.post('/login', {
       'code': code,
       'password': pwd,
-      'username': username
+      'username': username,
+      'verifyToken': this.tools.getVerifyToken()
     }).then((res: any) => {
       // 成功保存token
       this.tools.setToken(res.token);
