@@ -29,10 +29,10 @@ const routes: Routes = [
                 }]
             },
             {
-                path: 'setting',
+                path: 'profile',
                 children: [{
                     path: '',
-                    loadChildren: '../setting/setting.module#SettingPageModule'
+                    loadChildren: '../profile/profile.module#ProfilePageModule'
 
                 }]
             }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AxiosService } from '../axios.service';
 import {ToolsService} from '../tools.service';
-import{ServicesService} from '../services.service'
+import { ServicesService } from '../services.service';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +39,10 @@ export class LoginRequestService {
   }
   checkToken() {
     return this.axiosHttp.post('/checkToken', {});
+  }
+  async logout() {
+    return await this.axiosHttp.post('/logout', {}).then(res => {
+      this.tools.logoutCleanStorage();
+    });
   }
 }

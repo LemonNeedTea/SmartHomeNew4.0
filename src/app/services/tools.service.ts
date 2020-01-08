@@ -54,4 +54,8 @@ export class ToolsService {
     await toast.present();
     return toast;
   }
+  async logoutCleanStorage() {
+   await this.storage.remove('token');
+    await this.storage.remove('verify-token');
+  }
 }
