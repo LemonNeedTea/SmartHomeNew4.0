@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular'
-import { LoginRequestService } from '../services/request/login-request.service';
-import { ToolsService } from '../services/tools.service';
+import { LoginRequestService } from '../../services/request/login-request.service';
+import { ToolsService } from '../../services/tools.service';
 
 @Component({
   selector: 'app-login',

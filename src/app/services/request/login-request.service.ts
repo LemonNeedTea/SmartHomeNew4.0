@@ -32,7 +32,7 @@ export class LoginRequestService {
     }).then((res: any) => {
       // 成功保存token
       this.tools.setToken(res.token);
-      this.services.goto('main');
+      this.services.goto('tabs');
     }).catch(err => {
       console.log(err) ;
     });
