@@ -37,4 +37,7 @@ export class LoginRequestService {
       console.log(err) ;
     });
   }
+  checkToken() {
+    return this.axiosHttp.post('/checkToken', {});
+  }
 }

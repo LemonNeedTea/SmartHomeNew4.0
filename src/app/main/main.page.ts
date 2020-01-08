@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
 import { ServicesService } from '../services/services.service';
+import { LoginRequestService } from '../services/request/login-request.service';
 
 @Component({
   selector: 'app-main',
@@ -16,7 +17,8 @@ export class MainPage implements OnInit {
   id: string;
 
   constructor(private aut: AngularFireAuth,
-    private router: Router , public services: ServicesService ) {
+    private router: Router , public services: ServicesService,
+    private login: LoginRequestService ) {
     }
 
   ngOnInit() {
@@ -26,28 +28,13 @@ export class MainPage implements OnInit {
 
 
   logued() {
-    this.aut.authState
-      .subscribe(
-        user => {
-          if (user) {
-            console.log('loged');
-            this.id = user.uid;
-            console.log(this.id);
-            this.getProfile(this.id);
-          } else {
-            this.router.navigateByUrl('/login');
-          }
-        },
-        () => {
-          // this.router.navigateByUrl('/login');
-        }
-      );
+    this.login.checkToken();
   }
 
   async signOut() {
-    const res = await this.aut.auth.signOut();
-    console.log(res);
-    this.router.navigateByUrl('/login');
+    // const res = await this.aut.auth.signOut();
+    // console.log(res);
+    // this.router.navigateByUrl('/login');
   }
 
   async getProfile(id) {

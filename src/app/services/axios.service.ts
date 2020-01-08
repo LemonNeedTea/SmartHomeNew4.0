@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios, { AxiosRequestConfig } from 'axios';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { BaseUI } from '../../common/baseui';
 import { ToolsService } from './tools.service';
 import { Router } from '@angular/router';
 
@@ -9,7 +8,7 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class AxiosService extends BaseUI {
+export class AxiosService {
 
   isLoading = true;
   loader: any;
@@ -17,14 +16,13 @@ export class AxiosService extends BaseUI {
     private loading: LoadingController,
     private toastCtrl: ToastController,
     private router: Router) {
-    super();
     axios.defaults.baseURL = 'http://localhost:8888';
     // 添加响应拦截器
     axios.interceptors.request.use(
       async (config: AxiosRequestConfig) => {
         // 1.是否加载loading动画
         if (this.isLoading) {
-          super.showLoading(this.loading, 'Please wait...');
+          this.tools.showLoading('Please wait...');
         }
         config.headers['Accept'] = '*/*';
         config.headers['Content-Type'] = 'application/json';
@@ -50,7 +48,7 @@ export class AxiosService extends BaseUI {
           return tempData.data;
         } else {
           // 失败
-          super.showToast(this.toastCtrl, tempData['msg']);
+          this.tools.showToast(tempData['msg']);
           if (tempData.code === 5104) {// token失效
             // 1.清除token
             this.tools.cleanToken();
