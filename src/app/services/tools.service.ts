@@ -17,6 +17,9 @@ export class ToolsService {
       return null;
     }
   }
+  cleanToken() {
+    this.storage.remove('token');
+  }
   setVerifyToken(token: string) {
     this.storage.set('verify-token', token);
   }

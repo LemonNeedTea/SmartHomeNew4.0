@@ -1,20 +1,29 @@
 import { Injectable } from '@angular/core';
 import axios, { AxiosRequestConfig } from 'axios';
-import { async } from 'rxjs/internal/scheduler/async';
-import Qs from 'qs';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { BaseUI } from '../../common/baseui';
 import { ToolsService } from './tools.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class AxiosService {
+export class AxiosService extends BaseUI {
 
-  constructor(private tools: ToolsService) {
+  isLoading = true;
+  loader: any;
+  constructor(private tools: ToolsService,
+    private loading: LoadingController,
+    private toastCtrl: ToastController) {
+    super();
     axios.defaults.baseURL = 'http://localhost:8888';
     // 添加响应拦截器
     axios.interceptors.request.use(
-      (config: AxiosRequestConfig) => {
+      async (config: AxiosRequestConfig) => {
+        // 1.是否加载loading动画
+        if (this.isLoading) {
+          super.showLoading(this.loading, 'Please wait...');
+        }
         config.headers['Accept'] = '*/*';
         config.headers['Content-Type'] = 'application/json';
 
@@ -24,34 +33,46 @@ export class AxiosService {
         }
         return config;
       },
-      error => {
+      async error => {
         // 请求失败处理
+        this.loading.dismiss();
         return Promise.reject(error);
       }
     );
     axios.interceptors.response.use(
-      response => {
+      async response => {
+
+        this.loading.dismiss();
         const tempData = response.data;
         if (tempData.success) {
           return tempData.data;
         } else {
           // 失败
+          if (tempData.code === 5104) {// token失效
+            // 1.清除token
+            this.tools.cleanToken();
+            // 2.弹出确认返回登录框
+
+          }
           console.error(tempData);
           return Promise.reject(tempData);
         }
         return response.data;
       },
-      error => {
+      async error => {
         // 请求失败处理
+        this.loading.dismiss();
         return Promise.reject(error);
       }
     );
   }
 
   async get(url: string, params: any, isLoading = true) {
+    this.isLoading = isLoading;
     return axios.get(url, params);
   }
   async post(url: string, params: any, isLoading = true) {
+    this.isLoading = isLoading;
     return axios.post(url, params);
   }
 
