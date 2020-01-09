@@ -16,7 +16,7 @@ export class ProfilePage implements OnInit {
   item: any;
   anuncios: any;
   empty: Boolean;
-
+  darkMode: Boolean;
   constructor(private rout: Router,
     private services: ServicesService,
     private theme: ThemeService,
@@ -26,16 +26,11 @@ export class ProfilePage implements OnInit {
 
   enableDark() {
     this.theme.enableDark();
-    console.log('bravo going dark');
-    localStorage.setItem('theme', 'dark');
+    this.theme.setDarkStorage();
   }
   enableLight() {
     this.theme.enableLight();
-    console.log('bravo going light');
-    localStorage.setItem('theme', 'light');
-
-
-
+    this.theme.setLightStorage();
   }
 
   update(e) {
@@ -44,6 +39,7 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
     this.getLogueado();
+    this.darkMode = this.theme.isDarkMode();
    }
 
   getLogueado() {

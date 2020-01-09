@@ -21,11 +21,7 @@ export class AppComponent {
     private theme: ThemeService
   ) {
     this.initializeApp();
-      // this.theme.enableDark();
-
-    if ( localStorage.getItem('theme') === 'dark') {
-      this.theme.enableDark();
-    }
+    this.theme.initTheme();
   }
 
   initializeApp() {

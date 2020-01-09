@@ -24,7 +24,7 @@
         </div>
 
 
-        <h3 text-center> {{item[0].payload.doc.data().name}}</h3>
+        <h3 text-center>周波</h3>
 
         <div text-center>
             <!--  More thing of the profile 
@@ -41,7 +41,7 @@
             <ion-item>
                 <ion-icon slot="start" name="moon"></ion-icon>
                 Dark mode
-                <ion-toggle (ionChange)="update($event)" slot="end" color="primary"></ion-toggle>
+                <ion-toggle (ionChange)="update($event)" slot="end" color="primary" [(ngModel)]="darkMode"></ion-toggle>
             </ion-item>
 
             <ion-item>
