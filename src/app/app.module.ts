@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-
+import { DragulaModule } from 'ng2-dragula';
 
 
 @NgModule({
@@ -18,6 +18,7 @@ import { AppComponent } from './app.component';
   imports: [BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    DragulaModule.forRoot()
   ],
   providers: [
     StatusBar,

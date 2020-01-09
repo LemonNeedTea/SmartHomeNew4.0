@@ -1,24 +1,42 @@
-<ion-header no-border>
-    <ion-toolbar no-border>
-        <ion-title>
-            Ionic 4 Firestart
-        </ion-title>
-    </ion-toolbar>
-</ion-header>
+<ion-content forceOverscroll="false">
+    <div class="home-header" #homeHeaderContent>
+        <ion-toolbar transparent style="height: 80px;">
+            <ion-button>
+                <span class="username">波的家庭</span>
 
-<ion-content padding>
+                <ion-icon name="arrow-forward" style="font-size: 35px;margin-left: 5px;"></ion-icon>
+            </ion-button>
+            <ion-buttons slot="end">
+                <ion-button (click)="goedit()">
+                    <ion-icon color="primary" name="add" slot="icon-only"></ion-icon>
 
-    <div class="form">
-        <h1>Welcome! </h1>
-        <br>
-        <br>
-
+                </ion-button>
+            </ion-buttons>
+        </ion-toolbar>
     </div>
+    <div  dragula="bag" >
+        <div class="move">移动1</div>
+        <div class="move">移动2</div>
+        <div class="move">移动3</div>
+    </div>
+    <ion-grid>
 
-    <!-- Animation -->
+        <!-- <ion-row no-padding class="matrix">
+            <ion-col size="6" class="q1">
+                <div class="q-header">Do</div>
+                <ion-list dragula="bag" [(dragulaModel)]="q1" lines="none">
+                    <ion-item *ngFor="let item of q1" [color]="item.color" expand="block" text-wrap>
+                        {{ item.value }}
+                    </ion-item>
+                </ion-list>
+            </ion-col>
 
+          
+        </ion-row> -->
+    </ion-grid>
 
-
-
+    <ion-row class="delete-area" align-items-center justify-content-center>
+        <ion-icon name="trash" color="medium"></ion-icon>
+    </ion-row>
 
 </ion-content>
