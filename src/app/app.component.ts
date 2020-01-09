@@ -4,8 +4,6 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
 import { ThemeService } from './services/theme.service';
 
@@ -19,7 +17,6 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public aut: AngularFireAuth,
     private rout: Router,
     private theme: ThemeService
   ) {
@@ -38,18 +35,18 @@ export class AppComponent {
     });
 
 
-    this.aut.authState
-      .subscribe(
-        user => {
-          if (user) {
-            // this.rout.navigateByUrl('');
-          } else {
-            this.rout.navigateByUrl('/login');
-          }
-        },
-        () => {
-          // this.rout.navigateByUrl('/login');
-        }
-      );
+    // this.aut.authState
+    //   .subscribe(
+    //     user => {
+    //       if (user) {
+    //         // this.rout.navigateByUrl('');
+    //       } else {
+    //         this.rout.navigateByUrl('/login');
+    //       }
+    //     },
+    //     () => {
+    //       // this.rout.navigateByUrl('/login');
+    //     }
+    //   );
   }
 }

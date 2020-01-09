@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { ServicesService } from '../../services/services.service';
 import { ThemeService } from '../../services/theme.service';
 import { LoginRequestService } from '../../services/request/login-request.service';
@@ -20,7 +19,6 @@ export class ProfilePage implements OnInit {
 
   constructor(private rout: Router,
     private services: ServicesService,
-    private aut: AngularFireAuth ,
     private theme: ThemeService,
     private login: LoginRequestService) {
 

@@ -1,6 +1,5 @@
 
 import { Component , OnInit} from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { ServicesService } from '../../services/services.service';
 import { LoginRequestService } from '../../services/request/login-request.service';
@@ -15,8 +14,8 @@ export class MainPage implements OnInit {
   item: any;
   id: string;
 
-  constructor(private aut: AngularFireAuth,
-    private router: Router , public services: ServicesService,
+  constructor(private router: Router ,
+    public services: ServicesService,
     private login: LoginRequestService ) {
     }
 
@@ -37,16 +36,16 @@ export class MainPage implements OnInit {
   }
 
   async getProfile(id) {
-    await this.services.getProfile(id).subscribe((data: any) => {
-      if (data.length === 0) {
-        console.log('profile empty');
-        this.router.navigateByUrl(`edit-profile`);
-      } else {
-        console.log('Profile not empty');
-        console.log(data);
-        this.item = data;
-      }
-    });
+    // await this.services.getProfile(id).subscribe((data: any) => {
+    //   if (data.length === 0) {
+    //     console.log('profile empty');
+    //     this.router.navigateByUrl(`edit-profile`);
+    //   } else {
+    //     console.log('Profile not empty');
+    //     console.log(data);
+    //     this.item = data;
+    //   }
+    // });
   }
 
 

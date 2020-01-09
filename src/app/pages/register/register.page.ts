@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
+
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
@@ -18,7 +17,7 @@ export class RegisterPage {
   passwordType = 'password';
   passwordIcon = 'eye-off';
 
-  constructor(public afr: AngularFireAuth, public rout: Router , public alertController: AlertController) { }
+  constructor( public rout: Router , public alertController: AlertController) { }
 
 
 
@@ -30,31 +29,31 @@ export class RegisterPage {
       this.errorpassIguales();
       this.rout.navigate(['/register']);
     } else {
-      try {
-        await this.afr.auth.createUserWithEmailAndPassword(email, password).then(data => {
-          console.log(data);
-          setTimeout( () => {
-            this.rout.navigate(['']);
-          }, 1000);
-        });
+      // try {
+      //   await this.afr.auth.createUserWithEmailAndPassword(email, password).then(data => {
+      //     console.log(data);
+      //     setTimeout( () => {
+      //       this.rout.navigate(['']);
+      //     }, 1000);
+      //   });
 
-      } catch (error) {
-        console.log(error);
-        if (error.code === 'auth/wrong-password') {
-          this.error('Incorrect Password');
-        }  if (error.code === 'auth/user-not-found') {
-          this.error('User dont found');
-        }
-        if (error.code === 'auth/email-already-in-use') {
-          this.error('User already use');
-        }
-        if ( error.code === 'auth/argument-error') {
-          this.error('Argument error');
-         }
-         if ( error.code === 'auth/invalid-email') {
-          this.error('Invalid email');
-         }
-      }
+      // } catch (error) {
+      //   console.log(error);
+      //   if (error.code === 'auth/wrong-password') {
+      //     this.error('Incorrect Password');
+      //   }  if (error.code === 'auth/user-not-found') {
+      //     this.error('User dont found');
+      //   }
+      //   if (error.code === 'auth/email-already-in-use') {
+      //     this.error('User already use');
+      //   }
+      //   if ( error.code === 'auth/argument-error') {
+      //     this.error('Argument error');
+      //    }
+      //    if ( error.code === 'auth/invalid-email') {
+      //     this.error('Invalid email');
+      //    }
+      // }
     }
   }
   goLogin() {

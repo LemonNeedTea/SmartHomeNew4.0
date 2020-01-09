@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Route, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import * as firebase from 'firebase/app';
 
 
 @Injectable({
@@ -12,10 +10,9 @@ export class ServicesService {
 
   anuncios: any[] = [];
   info: any[] = [];
-  private itemsCollection: AngularFirestoreCollection<any>;
 
 
-  constructor(public afs: AngularFirestore, public rout: Router) {
+  constructor(public rout: Router) {
   }
 
 
@@ -25,41 +22,41 @@ export class ServicesService {
 
 
   getProfile(id) {
-    this.itemsCollection = this.afs.collection<any>(`users/${id}/profile/`);
+    // this.itemsCollection = this.afs.collection<any>(`users/${id}/profile/`);
 
-    return this.itemsCollection.snapshotChanges().pipe(map((info: any[]) => {
-      this.info = [];
+    // return this.itemsCollection.snapshotChanges().pipe(map((info: any[]) => {
+    //   this.info = [];
 
-      for (const infos of info) {
-        this.info.unshift(infos);
-      }
+    //   for (const infos of info) {
+    //     this.info.unshift(infos);
+    //   }
 
-      return this.info;
-    }));
+    //   return this.info;
+    // }));
   }
 
 
 
 
   createUser(value) {
-    return new Promise<any>((resolve, reject) => {
-      this.afs.collection(`users/${value.uid}/profile`).add({
-        name: value.name,
-        phone: value.phone,
-        mail: value.mail,
-        img: value.img,
-        uid: value.uid,
-        adress: value.adress,
-        date: Date.now()
-      });
-      this.rout.navigateByUrl(`profile`);
-    });
+    // return new Promise<any>((resolve, reject) => {
+    //   this.afs.collection(`users/${value.uid}/profile`).add({
+    //     name: value.name,
+    //     phone: value.phone,
+    //     mail: value.mail,
+    //     img: value.img,
+    //     uid: value.uid,
+    //     adress: value.adress,
+    //     date: Date.now()
+    //   });
+    //   this.rout.navigateByUrl(`profile`);
+    // });
   }
 
 
 
   updateUser(value, id?) {
-   return this.afs.collection('users').doc(value.uid).collection('profile').doc(id).set(value);
+  //  return this.afs.collection('users').doc(value.uid).collection('profile').doc(id).set(value);
   }
 
 }

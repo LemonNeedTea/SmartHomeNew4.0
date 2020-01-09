@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular'
 import { LoginRequestService } from '../../services/request/login-request.service';
@@ -21,7 +20,7 @@ export class LoginPage {
   passwordType = 'password';
   passwordIcon = 'eye-off';
 
-  constructor(public afs: AngularFireAuth, public rout: Router, public alertController: AlertController,
+  constructor( public rout: Router, public alertController: AlertController,
     private loginRequet: LoginRequestService,
     private tools: ToolsService) {
     this.getCode(); // 获取验证码图片
