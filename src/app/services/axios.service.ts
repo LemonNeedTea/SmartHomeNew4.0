@@ -53,6 +53,7 @@ export class AxiosService {
             // 1.清除token
             this.tools.cleanToken();
             // 2.弹出确认返回登录框
+            debugger;
             this.router.navigateByUrl('/login');
 
           }

@@ -28,14 +28,14 @@ const routes: Routes = [
                     loadChildren: '../smart/smart.module#SmartPageModule'
                 }]
             },
-            {
-                path: 'profile',
-                children: [{
-                    path: '',
-                    loadChildren: '../profile/profile.module#ProfilePageModule'
+            // {
+            //     path: 'profile',
+            //     children: [{
+            //         path: '',
+            //         loadChildren: '../profile/profile.module#ProfilePageModule'
 
-                }]
-            }
+            //     }]
+            // }
 
 
         ]
